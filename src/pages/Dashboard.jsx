@@ -1,24 +1,25 @@
+
 import React from 'react';
-import WorkoutGenerator from './WorkoutGenerator';
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 min-h-screen bg-gray-50">
-      <div className="border p-4 rounded-xl shadow bg-white">
-        <h2 className="text-xl font-bold mb-2">Workout Generator</h2>
-        <WorkoutGenerator />
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr', gap: '20px', padding: '20px' }}>
+      <div style={{ border: '1px solid #ccc', padding: '20px' }}>
+        <h2>Workout Generator</h2>
+        <Link to="/workout">Go to Workout Generator</Link>
       </div>
-      <div className="border p-4 rounded-xl shadow bg-white">
-        <h2 className="text-xl font-bold mb-2">Nutrition</h2>
+      <div style={{ border: '1px solid #ccc', padding: '20px' }}>
+        <h2>Nutrition</h2>
         <p>Nutrition content coming soon.</p>
       </div>
-      <div className="border p-4 rounded-xl shadow bg-white">
-        <h2 className="text-xl font-bold mb-2">Progress</h2>
-        <p>Progress tracking coming soon.</p>
+      <div style={{ border: '1px solid #ccc', padding: '20px' }}>
+        <h2>Progress</h2>
+        <Link to="/progress">Go to Progress</Link>
       </div>
-      <div className="border p-4 rounded-xl shadow bg-white">
-        <h2 className="text-xl font-bold mb-2">Settings</h2>
-        <p>Settings options coming soon.</p>
+      <div style={{ border: '1px solid #ccc', padding: '20px' }}>
+        <h2>Settings</h2>
+        <Link to="/settings">Go to Settings</Link>
       </div>
     </div>
   );

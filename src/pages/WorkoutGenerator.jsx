@@ -1,64 +1,56 @@
+
 import React, { useState } from 'react';
 
-const API_URL = import.meta.env.VITE_API_URL;
-
 const WorkoutGenerator = () => {
+  const [goal, setGoal] = useState('');
+  const [energyLevel, setEnergyLevel] = useState(5);
+  const [daysPerWeek, setDaysPerWeek] = useState(5);
+  const [equipment, setEquipment] = useState('');
+  const [fitnessLevel, setFitnessLevel] = useState('');
+  const [injuries, setInjuries] = useState('');
   const [plan, setPlan] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
 
-  const handleGeneratePlan = async () => {
+  const handleGeneratePlan = () => {
     setLoading(true);
-    setError(null);
-    try {
-      const response = await fetch(`${API_URL}/generate_multi_day_plan`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          goal: 'general fitness',
-          energy_level: 5,
-          days_per_week: 3,
-          equipment: 'bodyweight',
-          fitness_level: 'beginner',
-          injuries: ''
-        })
-      });
-      if (!response.ok) {
-        throw new Error('Failed to generate plan');
-      }
-      const data = await response.json();
-      setPlan(data.plan);
-    } catch (err) {
-      setError(err.message);
-    } finally {
+    // Simulate API call
+    setTimeout(() => {
+      setPlan('Sample multi-day workout plan based on your inputs.');
       setLoading(false);
-    }
+    }, 1000);
   };
 
   return (
-    <div>
-      <button
-        onClick={handleGeneratePlan}
-        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-        disabled={loading}
-      >
+    <div style={{ padding: '20px' }}>
+      <h2>Workout Generator</h2>
+      <div>
+        <label>Goal: </label>
+        <input value={goal} onChange={(e) => setGoal(e.target.value)} />
+      </div>
+      <div>
+        <label>Energy Level (1-10): </label>
+        <input type="number" value={energyLevel} onChange={(e) => setEnergyLevel(e.target.value)} min="1" max="10" />
+      </div>
+      <div>
+        <label>Days per Week: </label>
+        <input type="number" value={daysPerWeek} onChange={(e) => setDaysPerWeek(e.target.value)} />
+      </div>
+      <div>
+        <label>Equipment: </label>
+        <input value={equipment} onChange={(e) => setEquipment(e.target.value)} />
+      </div>
+      <div>
+        <label>Fitness Level: </label>
+        <input value={fitnessLevel} onChange={(e) => setFitnessLevel(e.target.value)} />
+      </div>
+      <div>
+        <label>Injuries: </label>
+        <input value={injuries} onChange={(e) => setInjuries(e.target.value)} />
+      </div>
+      <button onClick={handleGeneratePlan} disabled={loading}>
         {loading ? 'Generating...' : 'Generate Plan'}
       </button>
-
-      {error && <p className="text-red-500 mt-2">{error}</p>}
-
-      {plan && (
-        <div className="mt-4">
-          <h3 className="font-bold mb-2">Generated Plan:</h3>
-          {plan.days.map((day) => (
-            <div key={day.day} className="mb-2 p-2 border rounded">
-              <p><strong>Day {day.day}</strong></p>
-              <p>Workout: {day.workout}</p>
-              <p>Nutrition: {day.nutrition}</p>
-            </div>
-          ))}
-        </div>
-      )}
+      {plan && <div style={{ marginTop: '20px' }}><h3>Your Plan:</h3><p>{plan}</p></div>}
     </div>
   );
 };
