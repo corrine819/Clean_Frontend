@@ -19,3 +19,9 @@ Create a `.env` file with:
 ```
 VITE_API_URL=https://your-backend-url.com
 ```
+
+## Build for production
+
+```bash
+npm run build
+```
